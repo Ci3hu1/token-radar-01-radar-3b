@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>radar-3 — fitted token launch radar</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header>
+  <div>
+    <h1>radar-3 &mdash; fitted token launch radar</h1>
+    <p id="subtitle">Every rankable pre-token protocol in the sealed snapshot, ranked by an implied value fitted from the tokens that already trade.</p>
+  </div>
+  <div id="asof"></div>
+</header>
+<section id="kpis" aria-label="Key figures"></section>
+<nav id="tabs" aria-label="Views">
+  <button data-tab="board" class="on">Board</button>
+  <button data-tab="live">Traded</button>
+  <button data-tab="coverage">Coverage</button>
+  <button data-tab="method">Methodology</button>
+</nav>
+<main>
+  <section id="tab-board">
+    <div id="filters">
+      <input id="q" type="search" placeholder="Search name or slug" aria-label="Search">
+      <select id="cat" aria-label="Category"><option value="">All categories</option></select>
+      <select id="chain" aria-label="Chain"><option value="">All chains</option></select>
+      <select id="verdict" aria-label="Farm verdict">
+        <option value="">Any verdict</option>
+        <option value="farm">farm</option>
+        <option value="thin">thin</option>
+        <option value="skip">skip</option>
+      </select>
+      <select id="min" aria-label="Minimum TVL">
+        <option value="0">Any TVL</option>
+        <option value="100000000">TVL &ge; $100M</option>
+        <option value="1000000000">TVL &ge; $1B</option>
+        <option value="5000000000">TVL &ge; $5B</option>
+      </select>
+      <label><input id="watch" type="checkbox"> Watchlist only</label>
+      <span id="count"></span>
+    </div>
+    <table id="board">
+      <thead><tr>
+        <th data-k="rank">#</th><th data-k="name">Protocol</th><th data-k="category">Category</th>
+        <th data-k="chains">Chains</th><th data-k="tvl_usd">TVL</th><th data-k="change_7d">7d</th>
+        <th data-k="age_days">Age</th><th data-k="implied_value_usd">Implied value</th>
+        <th data-k="ev">Farm EV</th><th data-k="verdict">Verdict</th><th data-k="range">Rank range</th>
+      </tr></thead>
+      <tbody></tbody>
+    </table>
+  </section>
+  <section id="tab-live" hidden>
+    <p class="note">Protocols whose token already trades, by market cap. They are the comps the model is fitted on &mdash; never mixed into the ranking.</p>
+    <table id="livetab">
+      <thead><tr><th>Protocol</th><th>Category</th><th>Chains</th><th>TVL</th><th>Market cap</th><th>7d</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </section>
+  <section id="tab-coverage" hidden>
+    <p class="note" id="covnote"></p>
+    <h2>Excluded pre-token protocols</h2>
+    <p class="note">Pre-token on record, kept out of the ranking by the house watchlist rule (exchange, bridge, versioned pool, wrapped or staked product, exchange-named product). A protocol that records no token is described as recording no token, never as having none.</p>
+    <table id="extab">
+      <thead><tr><th>Protocol</th><th>Category</th><th>TVL</th><th>Reason</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </section>
+  <section id="tab-method" hidden>
+    <h2>Methodology &mdash; the model, fitted, and its tests</h2>
+    <div id="method"></div>
+  </section>
+</main>
+<aside id="drawer" hidden aria-label="Protocol detail"></aside>
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
